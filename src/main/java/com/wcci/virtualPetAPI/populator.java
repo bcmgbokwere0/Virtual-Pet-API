@@ -20,8 +20,11 @@ import com.wcci.virtualPetAPI.repository.RoboticDogRepository;
 public class populator implements CommandLineRunner {
     @Autowired
     private OrganicCatRepository OcatRepository;
+    @Autowired
     private OrganicDogRepository OdogRepository;
+    @Autowired
     private RoboticCatRepository RcatRepository;
+    @Autowired
     private RoboticDogRepository RdogRepository;
 
     @Override
@@ -32,10 +35,10 @@ public class populator implements CommandLineRunner {
         OrganicDog dog1 = new OrganicDog("Sally", "A black lab");
         OdogRepository.save(dog1);
 
-        // RoboCat cat2 = new RoboCat("Jimmy", "A robo Cat");
-        // RcatRepository.save(cat2);
+        RoboCat cat2 = new RoboCat("Jimmy", "A robo Cat");
+        RcatRepository.save(cat2);
 
-        // RoboDog dog2 = new RoboDog("Salley", "A robo lab");
-        // RdogRepository.save(dog2);
+        RoboDog dog2 = new RoboDog("Salley", "A robo lab");
+        RdogRepository.save(dog2);
     }
 }

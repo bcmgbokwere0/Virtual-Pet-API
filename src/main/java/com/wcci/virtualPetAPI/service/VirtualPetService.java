@@ -131,10 +131,19 @@ public class VirtualPetService {
     /*
      * Delete a VirtualPet from the repo. The "D" (delete) in CRUD
      */
-    public void deleteVirtualPet(String id) {
-        this.OcatRepository.deleteById(id);
-        this.RcatRepository.deleteById(id);
-        this.OdogRepository.deleteById(id);
-        this.RdogRepository.deleteById(id);
+    public void deleteOrganicCatById(String id) {
+        OcatRepository.deleteById(id);
+    }
+
+    public void deleteRoboticCatById(String id) {
+        RcatRepository.deleteById(id);
+    }
+
+    public void deleteOrganicDogById(String id) {
+        OdogRepository.deleteById(id);
+    }
+
+    public void deleteRoboticDogById(String id) {
+        RdogRepository.deleteById(id);
     }
 }

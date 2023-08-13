@@ -59,8 +59,23 @@ public class VirtualPetController {
         return this.virtualPetServ.updateVirtualPet(id, updatedVirtualPet);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void removeVirtualPet(@PathVariable String id) {
-        this.virtualPetServ.deleteVirtualPet(id);
+    @DeleteMapping("/delete/Ocat/{id}")
+    public void removeOrganicCat(@PathVariable String id) {
+        this.virtualPetServ.deleteOrganicCatById(id);
+    }
+
+    @DeleteMapping("/delete/Rcat/{id}")
+    public void removeRoboticCat(@PathVariable String id) {
+        this.virtualPetServ.deleteRoboticCatById(id);
+    }
+
+    @DeleteMapping("/delete/Odog/{id}")
+    public void removeOrganicDog(@PathVariable String id) {
+        this.virtualPetServ.deleteOrganicDogById(id);
+    }
+
+    @DeleteMapping("/delete/Rdog/{id}")
+    public void removeRoboticDog(@PathVariable String id) {
+        this.virtualPetServ.deleteRoboticDogById(id);
     }
 }
