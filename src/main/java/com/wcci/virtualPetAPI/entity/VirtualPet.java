@@ -1,11 +1,17 @@
 package com.wcci.virtualPetAPI.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.DiscriminatorType;
 
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "pet_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "\"animals\"")
 public abstract class VirtualPet {
 

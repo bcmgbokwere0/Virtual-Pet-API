@@ -1,14 +1,19 @@
 package com.wcci.virtualPetAPI.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("Odog")
 public class OrganicDog extends OrganicAnimal {
     int cage;
 
     public OrganicDog(String name, String description) {
         super(name, description);
+    }
+
+    public OrganicDog() {
     }
 
     public int getCage() {

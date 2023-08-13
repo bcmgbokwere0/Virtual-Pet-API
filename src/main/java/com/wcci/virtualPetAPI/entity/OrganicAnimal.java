@@ -1,13 +1,20 @@
 package com.wcci.virtualPetAPI.entity;
 
+import javax.persistence.Column;
+
 public abstract class OrganicAnimal extends VirtualPet {
+    @Column(name = "thirst")
     private int thirst;
+    @Column(name = "hunger")
     private int hunger;
 
     public OrganicAnimal(String name, String description) {
         super(name, description);
         this.thirst = 100;
         this.hunger = 100;
+    }
+
+    public OrganicAnimal() {
     }
 
     public int getHunger() {
