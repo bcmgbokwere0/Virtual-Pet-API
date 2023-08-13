@@ -1,14 +1,19 @@
 package com.wcci.virtualPetAPI.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("Rdog")
 public class RoboDog extends RoboticAnimal {
     int cage;
 
     public RoboDog(String name, String description) {
         super(name, description);
+    }
+
+    public RoboDog() {
     }
 
     public int getCage() {

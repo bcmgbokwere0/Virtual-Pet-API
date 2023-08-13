@@ -1,11 +1,17 @@
 package com.wcci.virtualPetAPI.entity;
 
+import javax.persistence.Column;
+
 public abstract class RoboticAnimal extends VirtualPet {
+    @Column(name = "oil")
     private int oil;
 
     public RoboticAnimal(String name, String description) {
         super(name, description);
         this.oil = 100;
+    }
+
+    public RoboticAnimal() {
     }
 
     public void setOil(int oil) {

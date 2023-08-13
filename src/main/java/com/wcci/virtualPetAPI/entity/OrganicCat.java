@@ -1,13 +1,18 @@
 package com.wcci.virtualPetAPI.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("Ocat")
 public class OrganicCat extends OrganicAnimal {
 
     public OrganicCat(String name, String description) {
         super(name, description);
+    }
+
+    public OrganicCat() {
     }
 
     public void calculateHappiness() {
