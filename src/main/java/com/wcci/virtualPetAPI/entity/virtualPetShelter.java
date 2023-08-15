@@ -2,11 +2,25 @@ package com.wcci.virtualPetAPI.entity;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 public class virtualPetShelter {
     private String name;
     private String description;
-    private ArrayList<VirtualPet> animals;
     private int litterbox;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pet_shelter_id", referencedColumnName = "shelter_id")
+    private ArrayList<VirtualPet> animals;
+
+    @ManyToMany
+    @JoinTable(name = "shelter_volunteer", joinColumns = @JoinColumn(name = "volunteershelter_id"), inverseJoinColumns = @JoinColumn(name = "volunteer_id"))
+    private ArrayList<Volunteer> volunteers;
 
     public virtualPetShelter(String name, String description) {
         this.name = name;
@@ -44,50 +58,6 @@ public class virtualPetShelter {
 
     public void clear() {
         this.animals = new ArrayList<VirtualPet>();
-    }
-
-    public void oilRobots() {
-        for (VirtualPet current : this.getAnimals()) {
-            if (current instanceof RoboticAnimal) {
-                ((RoboticAnimal) current).oil();
-            }
-        }
-    }
-
-    // public void cleanCages() {
-    // for (VirtualPet current : this.getAnimals()) {
-    // if (current instanceof Dog) {
-    // ((Dog) current).cleanCage();
-    // }
-    // }
-    // }
-
-    public void cleanLitterbox() {
-        litterbox = 100;
-    }
-
-    // public void walkDogs() {
-    // for (VirtualPet current : this.getAnimals()) {
-    // if (current instanceof Dog) {
-    // ((Dog) current).walkDog();
-    // }
-    // }
-    // }
-
-    public void feedPets() {
-        for (VirtualPet current : this.getAnimals()) {
-            if (current instanceof OrganicAnimal) {
-                ((OrganicAnimal) current).feed();
-            }
-        }
-    }
-
-    public void waterPets() {
-        for (VirtualPet current : this.getAnimals()) {
-            if (current instanceof OrganicAnimal) {
-                ((OrganicAnimal) current).water();
-            }
-        }
     }
 
     public VirtualPet getPet(String name) {
