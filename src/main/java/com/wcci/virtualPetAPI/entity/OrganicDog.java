@@ -2,12 +2,22 @@ package com.wcci.virtualPetAPI.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue("Odog")
 public class OrganicDog extends OrganicAnimal {
     int cage;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_shelter_id")
+    private virtualPetShelter shelter;
 
     public OrganicDog(String name, String description) {
         super(name, description);

@@ -1,11 +1,14 @@
 package com.wcci.virtualPetAPI.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Entity;
@@ -18,7 +21,6 @@ import javax.persistence.GenerationType;
 public abstract class Volunteer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -26,16 +28,15 @@ public abstract class Volunteer {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "review_volunteer_pets", referencedColumnName = "name") // maybe?
-    private List<virtualPetShelter> petShelter;
+    @ManyToMany
+    private ArrayList<virtualPetShelter> petShelter;
 
     // Constructors
 
     public Volunteer() {
     }
 
-    public Volunteer(String name, String description, String email, List<virtualPetShelter> petShelter) {
+    public Volunteer(String name, String description, String email, ArrayList<virtualPetShelter> petShelter) {
         this.name = name;
         this.description = description;
         this.email = email;
@@ -68,11 +69,11 @@ public abstract class Volunteer {
         this.email = email;
     }
 
-    public List<virtualPetShelter> getPetShelters(){
+    public List<virtualPetShelter> getPetShelters() {
         return petShelter;
     }
 
-    public void setPetShelter(List<virtualPetShelter> petShelter){
+    public void setPetShelter(ArrayList<virtualPetShelter> petShelter) {
         this.petShelter = petShelter;
     }
 

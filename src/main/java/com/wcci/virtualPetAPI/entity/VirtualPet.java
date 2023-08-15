@@ -13,6 +13,7 @@ import javax.persistence.DiscriminatorType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "pet_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "\"animals\"")
+
 public abstract class VirtualPet {
 
     @Id

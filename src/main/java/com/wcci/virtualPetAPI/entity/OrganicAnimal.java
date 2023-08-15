@@ -1,6 +1,11 @@
 package com.wcci.virtualPetAPI.entity;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class OrganicAnimal extends VirtualPet {
     @Column(name = "thirst")
