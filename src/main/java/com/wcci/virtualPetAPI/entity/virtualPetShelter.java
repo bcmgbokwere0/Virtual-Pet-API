@@ -3,15 +3,28 @@ package com.wcci.virtualPetAPI.entity;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "\"shelter\"")
 public class virtualPetShelter {
+
+    @Id
+    @Column(name = "shelter_id")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "litterbox")
     private int litterbox;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
