@@ -1,14 +1,9 @@
 package com.wcci.virtualPetAPI.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.wcci.virtualPetAPI.entity.OrganicDog;
 import com.wcci.virtualPetAPI.repository.OrganicDogRepository;
 
