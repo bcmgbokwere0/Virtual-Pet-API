@@ -13,7 +13,7 @@ import com.wcci.virtualPetAPI.repository.RoboticCatRepository;
 import com.wcci.virtualPetAPI.repository.RoboticDogRepository;
 
 @Component
-public class populator implements CommandLineRunner {
+public class population implements CommandLineRunner {
     @Autowired
     private OrganicCatRepository OcatRepository;
     @Autowired
