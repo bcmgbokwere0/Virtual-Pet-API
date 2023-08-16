@@ -1,6 +1,6 @@
 package com.wcci.virtualPetAPI.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,14 +29,14 @@ public abstract class Volunteer {
     private String email;
 
     @ManyToMany
-    private ArrayList<virtualPetShelter> petShelter;
+    private List<virtualPetShelter> petShelter;
 
     // Constructors
 
     public Volunteer() {
     }
 
-    public Volunteer(String name, String description, String email, ArrayList<virtualPetShelter> petShelter) {
+    public Volunteer(String name, String description, String email, List<virtualPetShelter> petShelter) {
         this.name = name;
         this.description = description;
         this.email = email;
@@ -73,7 +73,7 @@ public abstract class Volunteer {
         return petShelter;
     }
 
-    public void setPetShelter(ArrayList<virtualPetShelter> petShelter) {
+    public void setPetShelter(List<virtualPetShelter> petShelter) {
         this.petShelter = petShelter;
     }
 
