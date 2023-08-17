@@ -1,41 +1,37 @@
 package com.wcci.virtualPetAPI.service;
 
-<<<<<<< HEAD
+<<<<<<<HEAD
+
 import java.util.List;
 import java.util.Optional;
-=======
->>>>>>> dfdc041d08ccb633e4a8e52f836979ef00a22c43
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wcci.virtualPetAPI.entity.Volunteer;
 import com.wcci.virtualPetAPI.repository.VolunteerRepository;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-import java.util.Optional;
-
->>>>>>> dfdc041d08ccb633e4a8e52f836979ef00a22c43
 @Service
 public class VolunteerService {
 
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-<<<<<<< HEAD
+    <<<<<<<HEAD
+
     public void createVolunteer(Volunteer volunteer) {
         this.volunteerRepository.save(null);
     }
 
-=======
+    =======
     // Fetch all volunteers
->>>>>>> dfdc041d08ccb633e4a8e52f836979ef00a22c43
+    >>>>>>>dfdc041d08ccb633e4a8e52f836979ef00a22c43
+
     public List<Volunteer> getAllVolunteers() {
         return volunteerRepository.findAll();
     }
 
-<<<<<<< HEAD
+    <<<<<<<HEAD
+
     public Volunteer getVolunteerById(String id) {
         return null;
     }
@@ -55,8 +51,9 @@ public class VolunteerService {
     public void deleteVolunteerById(String id) {
         VolunteerRepository.deleteById(id);
     }
-}
-=======
+
+}=======
+
     // Fetch volunteer by name
     public Volunteer getVolunteerByName(String name) {
         return volunteerRepository.findByName(name);
@@ -81,6 +78,4 @@ public class VolunteerService {
         return null; 
     }
 
-
-}
->>>>>>> dfdc041d08ccb633e4a8e52f836979ef00a22c43
+}>>>>>>>dfdc041d08ccb633e4a8e52f836979ef00a22c43
