@@ -40,7 +40,7 @@ public class VolunteerController {
     // Find volunteer by name/ id?
     @GetMapping("/{name}")
     public Volunteer getVolunteerByName(@PathVariable String name) {
-        return volunteerRepository.findByName(name);
+        return volunteerRepository.getVolunteerById(name);
     }
 
     // Update existing volunteer
