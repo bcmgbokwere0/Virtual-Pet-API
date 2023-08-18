@@ -4,8 +4,6 @@ import java.security.Provider.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.wcci.virtualPetAPI.entity.Volunteer;
 import com.wcci.virtualPetAPI.repository.VolunteerRepository;
-import com.wcci.virtualPetAPI.service.VolunteerService;
 
 @RestController
 @RequestMapping("/volunteers")
@@ -46,7 +43,7 @@ public class VolunteerController {
     // Update existing volunteer
     @PutMapping("/modify/{id}")
     public Volunteer modifyVolunteer(@PathVariable String id, @RequestBody Volunteer updateVolunteer) {
-        return this.volunteerRepository.updateVoluteer(id, updateVolunteer);
+        return this.volunteerRepository.updateVolunteer(id, updateVolunteer);
     }
 
     // Delete volunteer
