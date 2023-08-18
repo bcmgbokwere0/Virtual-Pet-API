@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wcci.virtualPetAPI.entity.Volunteer;
+import com.wcci.virtualPetAPI.entity.virtualPetShelter;
 import com.wcci.virtualPetAPI.repository.VolunteerRepository;
 
 @Service
@@ -14,16 +15,13 @@ public class VolunteerService {
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-    // create volunteers
     public void createVolunteer(Volunteer volunteer) {
         this.volunteerRepository.save(volunteer);
     }
-
-    // Find all volunteers
+  
     public List<Volunteer> getAllVolunteers() {
         return volunteerRepository.findAll();
     }
-
     // Find volunteer by ID
     public Volunteer getVolunteerById(String id) {
         Optional<Volunteer> optionalVolunteer = volunteerRepository.findById(id);

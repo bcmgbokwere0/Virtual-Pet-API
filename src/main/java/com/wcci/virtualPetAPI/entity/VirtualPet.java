@@ -87,7 +87,4 @@ public abstract class VirtualPet {
         this.bladder = 100;
     }
 
-    public abstract void calculateHappiness();
-
-    public abstract int tick();
 }

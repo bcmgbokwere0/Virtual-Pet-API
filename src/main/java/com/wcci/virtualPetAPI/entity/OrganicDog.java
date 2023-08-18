@@ -10,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @DiscriminatorValue("Odog")
 public class OrganicDog extends OrganicAnimal {
-    int cage;
+    boolean cage;
+    boolean walked;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,26 +25,32 @@ public class OrganicDog extends OrganicAnimal {
     public OrganicDog() {
     }
 
-    public int getCage() {
+    public OrganicDog(String name, String description, virtualPetShelter shelter) {
+        super(name, description);
+        this.shelter = shelter;
+        this.cage = true;
+        this.walked = true;
+    }
+
+    public boolean getCage() {
         return this.cage;
     }
 
-    public void setCage(int cage) {
+    public void setCage(boolean cage) {
         this.cage = cage;
     }
 
     public void cleanCage() {
-        this.cage = 100;
+        this.cage = true;
     }
 
     public void calculateHappiness() {
         this.setHappiness(
-                this.getBladder() + this.getExercise() + this.getHunger() + this.getThirst() + this.getCage());
+                this.getBladder() + this.getExercise() + this.getHunger() + this.getThirst());
     }
 
     public void walkDog() {
-        this.setExercise(100);
-        this.setBladder(100);
+        this.walked = true;
     }
 
     public int tick() {
@@ -53,7 +60,7 @@ public class OrganicDog extends OrganicAnimal {
         this.setThirst(this.getThirst() - 10);
         this.calculateHappiness();
         if (this.getBladder() == 0) {
-            this.cage = this.cage - 10;
+            this.cage = false;
             this.setBladder(100);
             return 10;
         } else {

@@ -16,8 +16,9 @@ public class OrganicCat extends OrganicAnimal {
     @JoinColumn(name = "pet_shelter_id")
     private virtualPetShelter shelter;
 
-    public OrganicCat(String name, String description) {
+    public OrganicCat(String name, String description, virtualPetShelter shelter) {
         super(name, description);
+        this.shelter = shelter;
     }
 
     public OrganicCat() {
