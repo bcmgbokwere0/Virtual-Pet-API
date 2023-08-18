@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "\"shelter\"")
-public class virtualPetShelter {
+public class VirtualPetShelter {
 
     @Id
     @Column(name = "shelter_id")
@@ -27,38 +27,39 @@ public class virtualPetShelter {
     private int litterbox;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_shelter_id", referencedColumnName = "shelter_id")
+    @JoinColumn(name = "Ocatpet_shelter_id", referencedColumnName = "shelter_id")
     private List<OrganicCat> Ocat;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_shelter_id", referencedColumnName = "shelter_id")
+    @JoinColumn(name = "Odogpet_shelter_id", referencedColumnName = "shelter_id")
     private List<OrganicDog> Odog;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_shelter_id", referencedColumnName = "shelter_id")
+    @JoinColumn(name = "Rdogpet_shelter_id", referencedColumnName = "shelter_id")
     private List<RoboDog> Rdog;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_shelter_id", referencedColumnName = "shelter_id")
+    @JoinColumn(name = "Rcatpet_shelter_id", referencedColumnName = "shelter_id")
     private List<RoboCat> Rcat;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "shelter_volunteer", joinColumns = @JoinColumn(name = "volunteershelter_id"), inverseJoinColumns = @JoinColumn(name = "volunteer_id"))
     private List<Volunteer> volunteers;
 
-    public virtualPetShelter(String name, String description) {
+    public VirtualPetShelter(String name, String description) {
         this.name = name;
         this.Ocat = new ArrayList<OrganicCat>();
         this.Odog = new ArrayList<OrganicDog>();
         this.Rcat = new ArrayList<RoboCat>();
         this.Rdog = new ArrayList<RoboDog>();
+        this.volunteers = new ArrayList<Volunteer>();
         this.description = description;
     }
 
-    public virtualPetShelter() {
+    public VirtualPetShelter() {
     }
 
-    public virtualPetShelter(String name, String description, int litterbox, List<OrganicCat> Ocat,
+    public VirtualPetShelter(String name, String description, int litterbox, List<OrganicCat> Ocat,
             List<OrganicDog> Odog, List<RoboDog> Rdog, List<RoboCat> Rcat, List<Volunteer> volunteers) {
         this.name = name;
         this.description = description;
@@ -127,7 +128,17 @@ public class virtualPetShelter {
     }
 
     public List<Volunteer> getVolunteers() {
-        return this.volunteers;
+        List<Volunteer> output = new ArrayList<Volunteer>();
+        for (Volunteer volunteer : this.volunteers) {
+            Volunteer temporary = new Volunteer(volunteer.getName(),
+                    volunteer.getDescription(), volunteer.getEmail());
+            output.add(temporary);
+        }
+        return output;
+    }
+
+    public void addVolunteers(Volunteer newvolunteer) {
+        this.volunteers.add(newvolunteer);
     }
 
     public void setVolunteers(List<Volunteer> volunteers) {

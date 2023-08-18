@@ -10,36 +10,40 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @DiscriminatorValue("Rdog")
 public class RoboDog extends RoboticAnimal {
-    int cage;
+    boolean cage;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_shelter_id")
-    private virtualPetShelter shelter;
+    @JoinColumn(name = "Rdogpet_shelter_id")
+    private VirtualPetShelter shelter;
 
     public RoboDog(String name, String description) {
         super(name, description);
     }
 
-    public RoboDog(String name, String description, virtualPetShelter shelter) {
+    public RoboDog(String name, String description, VirtualPetShelter shelter) {
         super(name, description);
-        this.cage = 100;
+        this.cage = true;
         this.shelter = shelter;
     }
 
     public RoboDog() {
     }
 
-    public int getCage() {
+    public boolean getCage() {
         return this.cage;
     }
 
-    public void setCage(int cage) {
+    public void setCage(boolean cage) {
         this.cage = cage;
     }
 
+    public String getShelter() {
+        return this.shelter.getName();
+    }
+
     public void cleanCage() {
-        this.cage = 100;
+        this.cage = true;
     }
 
     public void walkDog() {

@@ -47,10 +47,13 @@ public class OrganicCatService {
         OrganicCat existingAnimal = getOrganicCatById(id);
 
         if (existingAnimal != null) {
-            existingAnimal.setName(updatedVpet.getName());
-            if (existingAnimal instanceof OrganicCat) {
-                OcatRepository.save((OrganicCat) existingAnimal);
-            }
+            existingAnimal.setBladder(updatedVpet.getBladder());
+            existingAnimal.setDescription(updatedVpet.getDescription());
+            existingAnimal.setExercise(updatedVpet.getExercise());
+            existingAnimal.setHappiness(updatedVpet.getHappiness());
+            existingAnimal.setHunger(updatedVpet.getHunger());
+            existingAnimal.setThirst(updatedVpet.getThirst());
+            OcatRepository.save(existingAnimal);
         }
 
         return null; // Return null if the animal with the given ID is not found
@@ -59,7 +62,11 @@ public class OrganicCatService {
     /*
      * Delete a OrganicCat from the repo. The "D" (delete) in CRUD
      */
-    public void deleteOrganicCatById(String id) {
-        OcatRepository.deleteById(id);
+    public boolean deleteOrganicCatById(String id) {
+        if (OcatRepository.existsById(id)) {
+            OcatRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

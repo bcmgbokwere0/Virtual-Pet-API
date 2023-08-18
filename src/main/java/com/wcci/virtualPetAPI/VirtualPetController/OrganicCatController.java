@@ -32,7 +32,7 @@ public class OrganicCatController {
         return this.OrganicCatServ.getAllOrganicCats();
     }
 
-    @GetMapping("/findbyid/{id}")
+    @GetMapping("/{id}")
     public OrganicCat findOrganicCatById(@PathVariable String id) {
         return this.OrganicCatServ.getOrganicCatById(id);
     }

@@ -15,8 +15,8 @@ public class OrganicDog extends OrganicAnimal {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_shelter_id")
-    private virtualPetShelter shelter;
+    @JoinColumn(name = "Odogpet_shelter_id")
+    private VirtualPetShelter shelter;
 
     public OrganicDog(String name, String description) {
         super(name, description);
@@ -25,7 +25,7 @@ public class OrganicDog extends OrganicAnimal {
     public OrganicDog() {
     }
 
-    public OrganicDog(String name, String description, virtualPetShelter shelter) {
+    public OrganicDog(String name, String description, VirtualPetShelter shelter) {
         super(name, description);
         this.shelter = shelter;
         this.cage = true;
@@ -53,18 +53,7 @@ public class OrganicDog extends OrganicAnimal {
         this.walked = true;
     }
 
-    public int tick() {
-        this.setBladder(this.getBladder() - 10);
-        this.setExercise(this.getExercise() - 5);
-        this.setHunger(this.getHunger() - 5);
-        this.setThirst(this.getThirst() - 10);
-        this.calculateHappiness();
-        if (this.getBladder() == 0) {
-            this.cage = false;
-            this.setBladder(100);
-            return 10;
-        } else {
-            return 0;
-        }
+    public String getShelter() {
+        return this.shelter.getName();
     }
 }

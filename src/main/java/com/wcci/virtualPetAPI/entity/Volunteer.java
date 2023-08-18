@@ -1,11 +1,13 @@
 package com.wcci.virtualPetAPI.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name = "\"volunteer\"")
@@ -19,19 +21,19 @@ public class Volunteer {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
-    private List<virtualPetShelter> petShelter;
+    @ManyToMany(mappedBy = "volunteers", fetch = FetchType.LAZY)
+    private List<VirtualPetShelter> petShelter;
 
     // Constructors
 
     public Volunteer() {
     }
 
-    public Volunteer(String name, String description, String email, List<virtualPetShelter> petShelter) {
+    public Volunteer(String name, String description, String email) {
         this.name = name;
         this.description = description;
         this.email = email;
-        this.petShelter = petShelter;
+        this.petShelter = new ArrayList<VirtualPetShelter>();
     }
 
     // Getters and Setters
@@ -60,12 +62,20 @@ public class Volunteer {
         this.email = email;
     }
 
-    public List<virtualPetShelter> getPetShelters() {
-        return petShelter;
+    public List<String> getPetShelters() {
+        List<String> output = new ArrayList<String>();
+        for (VirtualPetShelter shelter : this.petShelter) {
+            output.add(shelter.getName());
+        }
+        return output;
     }
 
-    public void setPetShelter(List<virtualPetShelter> petShelter) {
+    public void setPetShelter(List<VirtualPetShelter> petShelter) {
         this.petShelter = petShelter;
+    }
+
+    public void addShelter(VirtualPetShelter shelter) {
+        this.petShelter.add(shelter);
     }
 
 }

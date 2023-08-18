@@ -47,10 +47,14 @@ public class OrganicDogService {
         OrganicDog existingAnimal = getOrganicDogById(id);
 
         if (existingAnimal != null) {
-            existingAnimal.setName(updatedVpet.getName());
-            if (existingAnimal instanceof OrganicDog) {
-                OdogRepository.save((OrganicDog) existingAnimal);
-            }
+            existingAnimal.setBladder(updatedVpet.getBladder());
+            existingAnimal.setDescription(updatedVpet.getDescription());
+            existingAnimal.setExercise(updatedVpet.getExercise());
+            existingAnimal.setHappiness(updatedVpet.getHappiness());
+            existingAnimal.setHunger(updatedVpet.getHunger());
+            existingAnimal.setThirst(updatedVpet.getThirst());
+            existingAnimal.setCage(updatedVpet.getCage());
+            OdogRepository.save(existingAnimal);
         }
 
         return null; // Return null if the animal with the given ID is not found
@@ -59,7 +63,11 @@ public class OrganicDogService {
     /*
      * Delete a OrganicDog from the repo. The "D" (delete) in CRUD
      */
-    public void deleteOrganicDogById(String id) {
-        OdogRepository.deleteById(id);
+    public boolean deleteOrganicDogById(String id) {
+        if (OdogRepository.existsById(id)) {
+            OdogRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

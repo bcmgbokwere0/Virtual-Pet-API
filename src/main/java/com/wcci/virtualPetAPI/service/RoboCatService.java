@@ -32,9 +32,9 @@ public class RoboCatService {
      */
     public RoboCat getRoboCatById(String id) {
 
-        Optional<RoboCat> Ocat = RCatRepository.findById(id);
-        if (Ocat.isPresent()) {
-            return Ocat.get();
+        Optional<RoboCat> Rcat = RCatRepository.findById(id);
+        if (Rcat.isPresent()) {
+            return Rcat.get();
         }
         return null;
     }
@@ -47,10 +47,12 @@ public class RoboCatService {
         RoboCat existingAnimal = getRoboCatById(id);
 
         if (existingAnimal != null) {
-            existingAnimal.setName(updatedVpet.getName());
-            if (existingAnimal instanceof RoboCat) {
-                RCatRepository.save((RoboCat) existingAnimal);
-            }
+            existingAnimal.setBladder(updatedVpet.getBladder());
+            existingAnimal.setDescription(updatedVpet.getDescription());
+            existingAnimal.setExercise(updatedVpet.getExercise());
+            existingAnimal.setHappiness(updatedVpet.getHappiness());
+            existingAnimal.setOil(updatedVpet.getOil());
+            RCatRepository.save(existingAnimal);
         }
 
         return null; // Return null if the animal with the given ID is not found
@@ -59,7 +61,11 @@ public class RoboCatService {
     /*
      * Delete a RoboCat from the repo. The "D" (delete) in CRUD
      */
-    public void deleteRoboCatById(String id) {
-        RCatRepository.deleteById(id);
+    public boolean deleteRoboCatById(String id) {
+        if (RCatRepository.existsById(id)) {
+            RCatRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

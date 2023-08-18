@@ -7,7 +7,4 @@ import com.wcci.virtualPetAPI.entity.Volunteer;
 
 @Repository
 public interface VolunteerRepository extends JpaRepository<Volunteer, String> {
-    Volunteer getVolunteerById(String id);
-
-    Volunteer updateVolunteer(String id, Volunteer updateVolunteer);
 }

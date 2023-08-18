@@ -13,19 +13,23 @@ public class RoboCat extends RoboticAnimal {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_shelter_id")
-    private virtualPetShelter shelter;
+    @JoinColumn(name = "Rcatpet_shelter_id")
+    private VirtualPetShelter shelter;
 
     public RoboCat(String name, String description) {
         super(name, description);
     }
 
-    public RoboCat(String name, String description, virtualPetShelter shelter) {
+    public RoboCat(String name, String description, VirtualPetShelter shelter) {
         super(name, description);
         this.shelter = shelter;
     }
 
     public RoboCat() {
+    }
+
+    public String getShelter() {
+        return this.shelter.getName();
     }
 
     public void calculateHappiness() {

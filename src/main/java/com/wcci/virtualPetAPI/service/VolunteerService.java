@@ -13,37 +13,39 @@ public class VolunteerService {
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-    // create volunteers
     public void createVolunteer(Volunteer volunteer) {
         this.volunteerRepository.save(volunteer);
     }
 
-    // Find all volunteers
     public List<Volunteer> getAllVolunteers() {
         return volunteerRepository.findAll();
     }
 
-    // Find volunteer by ID
     public Volunteer getVolunteerById(String id) {
-        Optional<Volunteer> optionalVolunteer = volunteerRepository.findById(id);
-        return optionalVolunteer.orElseThrow();
-    }
-
-    // Update existing volunteer
-    public Volunteer updateVolunteer(Volunteer volunteer) {
-        if (volunteerRepository.existsById(volunteer.getName())) {
-            return volunteerRepository.save(volunteer);
+        Optional<Volunteer> volunteer = volunteerRepository.findById(id);
+        if (volunteer.isPresent()) {
+            return volunteer.get();
         }
         return null;
     }
 
-    // Delete a volunteer
+    public Volunteer updateVolunteer(String id, Volunteer updatedV) {
+        Volunteer existingVolunteer = getVolunteerById(id);
+
+        if (existingVolunteer != null) {
+            existingVolunteer.setEmail(updatedV.getEmail());
+            existingVolunteer.setDescription((updatedV.getDescription()));
+            return volunteerRepository.save(updatedV);
+        }
+        return null;
+    }
+
     public boolean deleteVolunteerById(String id) {
-        if (volunteerRepository.existsById(id))
-            ;
-        {
+        if (volunteerRepository.existsById(id)) {
             volunteerRepository.deleteById(id);
             return true;
+        } else {
+            return false;
         }
     }
 }

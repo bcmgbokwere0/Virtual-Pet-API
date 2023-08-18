@@ -47,10 +47,13 @@ public class RoboDogService {
         RoboDog existingAnimal = getRoboDogById(id);
 
         if (existingAnimal != null) {
-            existingAnimal.setName(updatedVpet.getName());
-            if (existingAnimal instanceof RoboDog) {
-                RDogRepository.save((RoboDog) existingAnimal);
-            }
+            existingAnimal.setBladder(updatedVpet.getBladder());
+            existingAnimal.setDescription(updatedVpet.getDescription());
+            existingAnimal.setExercise(updatedVpet.getExercise());
+            existingAnimal.setHappiness(updatedVpet.getHappiness());
+            existingAnimal.setOil(updatedVpet.getOil());
+            existingAnimal.setCage(updatedVpet.getCage());
+            RDogRepository.save(existingAnimal);
         }
 
         return null; // Return null if the animal with the given ID is not found
@@ -59,7 +62,11 @@ public class RoboDogService {
     /*
      * Delete a RoboDog from the repo. The "D" (delete) in CRUD
      */
-    public void deleteRoboDogById(String id) {
-        RDogRepository.deleteById(id);
+    public boolean deleteRoboDogById(String id) {
+        if (RDogRepository.existsById(id)) {
+            RDogRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

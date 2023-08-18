@@ -1,8 +1,8 @@
 package com.wcci.virtualPetAPI.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.wcci.virtualPetAPI.entity.virtualPetShelter;
+import com.wcci.virtualPetAPI.entity.VirtualPetShelter;
 import com.wcci.virtualPetAPI.repository.ShelterRepository;
 
 import java.util.List;
@@ -14,31 +14,38 @@ public class ShelterService {
     @Autowired
     private ShelterRepository shelterRepository;
 
-    // Retrieve all shelters
-    public List<virtualPetShelter> getAllShelters() {
-        return shelterRepository.findAll();
-    }
-
-    // Retrieve a specific shelter by ID
-    public virtualPetShelter getShelterById(String id) {
-        Optional<virtualPetShelter> optionalShelter = shelterRepository.findById(id);
-        return optionalShelter.orElse(null);
-    }
-
-    // Add a new shelter
-    public virtualPetShelter addShelter(virtualPetShelter shelter) {
+    public VirtualPetShelter createShelter(VirtualPetShelter shelter) {
         return shelterRepository.save(shelter);
     }
 
-    // Update an existing shelter
-    public virtualPetShelter updateShelter(virtualPetShelter shelter) {
-        if (shelterRepository.existsById(shelter.getName())) {
+    public List<VirtualPetShelter> getAllShelters() {
+        return shelterRepository.findAll();
+    }
+
+    public VirtualPetShelter getShelterById(String id) {
+        Optional<VirtualPetShelter> shelter = shelterRepository.findById(id);
+        if (shelter.isPresent()) {
+            return shelter.get();
+        }
+        return null;
+    }
+
+    public VirtualPetShelter updateShelter(String id, VirtualPetShelter shelter) {
+        VirtualPetShelter existingShelter = getShelterById(id);
+
+        if (existingShelter != null) {
+            existingShelter.setDescription(shelter.getDescription());
+            existingShelter.setLitterbox(shelter.getLitterbox());
+            existingShelter.setOcat(shelter.getOcat());
+            existingShelter.setOdog(shelter.getOdog());
+            existingShelter.setRcat(shelter.getRcat());
+            existingShelter.setRdog(shelter.getRdog());
+            existingShelter.setVolunteers(shelter.getVolunteers());
             return shelterRepository.save(shelter);
         }
         return null;
     }
 
-    // Delete a specific shelter by ID
     public boolean deleteShelter(String id) {
         if (shelterRepository.existsById(id)) {
             shelterRepository.deleteById(id);
@@ -46,6 +53,5 @@ public class ShelterService {
         }
         return false;
     }
-
 
 }

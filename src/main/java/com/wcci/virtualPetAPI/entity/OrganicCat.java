@@ -13,10 +13,10 @@ public class OrganicCat extends OrganicAnimal {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_shelter_id")
-    private virtualPetShelter shelter;
+    @JoinColumn(name = "Ocatpet_shelter_id")
+    private VirtualPetShelter shelter;
 
-    public OrganicCat(String name, String description, virtualPetShelter shelter) {
+    public OrganicCat(String name, String description, VirtualPetShelter shelter) {
         super(name, description);
         this.shelter = shelter;
     }
@@ -24,22 +24,12 @@ public class OrganicCat extends OrganicAnimal {
     public OrganicCat() {
     }
 
+    public String getShelter() {
+        return this.shelter.getName();
+    }
+
     public void calculateHappiness() {
         this.setHappiness(
                 this.getBladder() + this.getExercise() + this.getHunger() + this.getThirst());
-    }
-
-    public int tick() {
-        this.setBladder(this.getBladder() - 10);
-        this.setExercise(this.getExercise() - 5);
-        this.setHunger(this.getHunger() - 5);
-        this.setThirst(this.getThirst() - 10);
-        this.calculateHappiness();
-        if (this.getBladder() < 0) {
-            this.setBladder(100);
-            return 10;
-        } else {
-            return 0;
-        }
     }
 }
