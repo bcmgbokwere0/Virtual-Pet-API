@@ -16,37 +16,33 @@ public class VolunteerService {
     private VolunteerRepository volunteerRepository;
 
     public void createVolunteer(Volunteer volunteer) {
-        this.volunteerRepository.save(null);
+        this.volunteerRepository.save(volunteer);
     }
-
-    // Fetch all volunteers
-
+  
     public List<Volunteer> getAllVolunteers() {
         return volunteerRepository.findAll();
     }
-
-    // Fetch volunteer by name
-    public Volunteer getVolunteerByID(String name) {
-        Optional<Volunteer> volunteer = volunteerRepository.findById(name);
-        return volunteer.orElse(null);
+    // Find volunteer by ID
+    public Volunteer getVolunteerById(String id) {
+        Optional<Volunteer> optionalVolunteer = volunteerRepository.findById(id);
+        return optionalVolunteer.orElseThrow();
     }
 
-    // Add a new volunteer
-    public Volunteer addVolunteer(Volunteer volunteer) {
-        // Here, you can add any business logic before saving the volunteer.
-        return volunteerRepository.save(volunteer);
-    }
-
-    // Delete a volunteer by ID
-    public void deleteVolunteer(String id) {
-        volunteerRepository.deleteById(id);
-    }
-
-    // Update a volunteer
+    // Update existing volunteer
     public Volunteer updateVolunteer(Volunteer volunteer) {
         if (volunteerRepository.existsById(volunteer.getName())) {
             return volunteerRepository.save(volunteer);
         }
         return null;
+    }
+
+    // Delete a volunteer
+    public boolean deleteVolunteerById(String id) {
+        if (volunteerRepository.existsById(id))
+            ;
+        {
+            volunteerRepository.deleteById(id);
+            return true;
+        }
     }
 }
